@@ -7,7 +7,8 @@ class Template
   end
 
   def add(checks)
-    raise TypeError if checks.any? { |c| c.class != Check }
+    return false if checks.any? { |c| c.class != Check }
+
     checks_dup = checks.dup.uniq
     @checks.concat(checks_dup)
   end

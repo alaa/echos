@@ -19,7 +19,7 @@ describe Template do
 
     it "raises TypeError if checks array is not a Check Object" do
       template = Template.new(:basic)
-      expect{ template.add([Object.new]) }.to raise_error
+      expect(template.add([Object.new])).to be_false
     end
   end
 
