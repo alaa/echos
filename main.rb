@@ -11,8 +11,8 @@ disk_template.add([check_disk, check_load, check_disk])
 performance_template = Template.new(:performance_template)
 performance_template.add([check_mem, check_load])
 
-a = disk_template + performance_template
-a.checks.each do |x|
+combined_template = disk_template + performance_template
+combined_template.checks.each do |x|
   puts ">> #{x.name} \n"
   system(x.command)
 end
