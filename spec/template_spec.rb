@@ -32,7 +32,7 @@ describe Template do
       template2.add([check_mem])
 
       template_1_2 = template1 + template2
-      expect(template_1_2.name).to eq "basic1_basic2"
+      expect(template_1_2.name).to eq "basic1_and_basic2"
       expect(template_1_2.checks).to eq [check_disk, check_mem]
     end
 
@@ -47,4 +47,3 @@ describe Template do
     end
   end
 end
-

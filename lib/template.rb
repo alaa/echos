@@ -17,7 +17,7 @@ class Template
     raise TypeError if other.class != Template
     return self if self == other
 
-    self.name = [self.name, other.name].map!(&:to_s).join('_')
+    self.name = [self.name, other.name].map!(&:to_s).join('_and_')
     self.checks = (self.checks << other.checks).flatten.uniq
     self
   end
