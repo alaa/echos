@@ -43,7 +43,7 @@ describe Template do
 
       expect(template_1_1.name).to eq :basic1
       expect(template_1_1.checks).to eq [check_disk]
-      expect(template1 + Object.new).to be_false
+      expect{ template1 + Object.new }.to raise_error
     end
   end
 end
