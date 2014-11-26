@@ -13,7 +13,7 @@ class Template
   end
 
   def +(other)
-    raise TypeError if other.class != Template
+    raise TypeError if other.class != self.class
     return self if self == other
 
     self.name = [self.name, other.name].map!(&:to_s).join('_and_')
