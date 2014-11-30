@@ -1,17 +1,28 @@
+require 'eventmachine'
 require "./lib/echos"
 
 CONF_FILE = "./config/checks.json"
 
 checks = Echos::Loader.load_file(CONF_FILE)
 
-checks.each do |check|
-  check = Echos::Check.new(check.first, check.last)
+EM.run do
 
-  cmd = Echos::Command.new
-  cmd.execute!(check)
-  puts cmd.packet.to_s
+  checks.each do |check|
+    check = Echos::Check.new(check.first, check.last)
 
-  q = Echos::Transport.new
-  q.publish(cmd.packet.to_s)
+    puts "+++ Registering #{check.name} with EventMachine +++ "
+
+    Thread.new {
+      EM.add_periodic_timer(check.interval) do
+        cmd = Echos::Command.new
+        cmd.execute!(check)
+
+        q = Echos::Transport.new
+        q.publish(cmd.packet.to_s)
+      end
+    }
+
+  end
+
 end
 
