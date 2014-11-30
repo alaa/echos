@@ -28,16 +28,16 @@ module Echos
     def packet
       { hostname: Socket.gethostname,
         timestamp: Time.now,
-        check_name: @check_name,
-        stdout: @child.out,
-        stderr: @child.err,
-        exitstatus: @child.status.exitstatus,
-        runtime: @child.runtime,
-        pid: @child.status.pid }
+        check_name: check_name,
+        stdout: child.out,
+        stderr: child.err,
+        exitstatus: child.status.exitstatus,
+        runtime: child.runtime,
+        pid: child.status.pid }
     end
 
     private
-    attr_reader :child
+    attr_reader :child, :check_name
   end
 end
 
