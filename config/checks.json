@@ -43,7 +43,8 @@
 
   "lsof": {
     "command": "lsof -nP | grep '(deleted)' | wc -l",
-    "timeout": 15
+    "timeout": 15,
+    "handlers": ["statsd", "reimann"]
   },
 
   "check_ssh": {

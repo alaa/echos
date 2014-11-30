@@ -12,11 +12,11 @@ module Echos
     end
 
     def execute!(check)
+      @check = check
       command = check.path ? (check.path + check.command) : check.command
 
       begin
         @child = POSIX::Spawn::Child.new(command, timeout: (check.timeout || timeout))
-        @check_name = check.name.to_s
         child.status.success?
 
       rescue POSIX::Spawn::TimeoutExceeded => e
@@ -28,7 +28,8 @@ module Echos
     def packet
       { hostname: Socket.gethostname,
         timestamp: Time.now,
-        check_name: check_name,
+        check_name: @check.name.to_s,
+        check_handlers: @check.handlers,
         stdout: child.out,
         stderr: child.err,
         exitstatus: child.status.exitstatus,
