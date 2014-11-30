@@ -41,6 +41,11 @@
     "path": "/usr/lib/nagios/plugins/"
   },
 
+  "lsof": {
+    "command": "lsof -nP | grep '(deleted)' | wc -l",
+    "timeout": 15
+  },
+
   "check_ssh": {
     "command": "check_ssh localhost",
     "path": "/usr/lib/nagios/plugins/",
