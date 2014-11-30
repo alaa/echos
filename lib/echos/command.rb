@@ -13,16 +13,10 @@ module Echos
 
     def execute!(check)
       command = (check.path + check.command) || check.command
+
       begin
-        child = POSIX::Spawn::Child.new(command, timeout: (check.timeout || timeout))
-
-        @pid = child.status.pid
-        @stdout = child.out
-        @stderr = child.err
-        @exitstatus  = child.status.exitstatus
-        @runtime = child.runtime
+        @child = POSIX::Spawn::Child.new(command, timeout: (check.timeout || timeout))
         @check_name = check.name.to_s
-
         child.status.success?
 
       rescue POSIX::Spawn::TimeoutExceeded => e
@@ -35,12 +29,15 @@ module Echos
       { hostname: Socket.gethostname,
         timestamp: Time.now,
         check_name: @check_name,
-        stdout: @stdout,
-        stderr: @stderr,
-        exitstatus: @exitstatus,
-        runtime: @runtime,
-        pid: @pid }
+        stdout: @child.out,
+        stderr: @child.err,
+        exitstatus: @child.status.exitstatus,
+        runtime: @child.runtime,
+        pid: @child.status.pid }
     end
+
+    private
+    attr_reader :child
   end
 end
 
