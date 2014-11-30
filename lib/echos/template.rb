@@ -6,7 +6,7 @@ class Template
     @checks ||= []
   end
 
-  def add(checks)
+  def add_checks(checks)
     return false if checks.any? { |c| c.class != Check }
     checks_dup = checks.dup.uniq
     @checks.concat(checks_dup)
