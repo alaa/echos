@@ -1,8 +1,9 @@
 module Echos
   class Check
-    attr_reader :name, :command, :timeout, :handlers, :path
+    attr_reader :name, :command, :timeout, :handlers, :path, :interval
 
     DEFAULT_CHECK_TIMEOUT = 5
+    DEFFAULT_INTERVAL_VALUE = 30
     DEFAULT_HANDLER = "default_handler"
 
     def initialize(check_name, args={})
@@ -11,6 +12,7 @@ module Echos
       @timeout = args.fetch(:timeout, DEFAULT_CHECK_TIMEOUT)
       @handlers = args.fetch(:handlers, DEFAULT_HANDLER)
       @path = args.fetch(:path, false)
+      @interval = args.fetch(:interval, DEFFAULT_INTERVAL_VALUE)
     end
 
     def ==(other)
