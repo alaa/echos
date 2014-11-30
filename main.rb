@@ -1,6 +1,6 @@
 require "./lib/echos"
 
-CONF_FILE = "./config/memory.json"
+CONF_FILE = "./config/checks.json"
 
 checks = Echos::Loader.load_file(CONF_FILE)
 
