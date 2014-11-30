@@ -13,6 +13,5 @@ checks.each do |check|
 
   q = Echos::Transport.new
   q.publish(cmd.packet.to_s)
-
 end
 

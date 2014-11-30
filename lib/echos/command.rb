@@ -12,7 +12,7 @@ module Echos
     end
 
     def execute!(check)
-      command = (check.path + check.command) || check.command
+      command = check.path ? (check.path + check.command) : check.command
 
       begin
         @child = POSIX::Spawn::Child.new(command, timeout: (check.timeout || timeout))
