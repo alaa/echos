@@ -1,19 +1,18 @@
-require_relative "./lib/check"
-require_relative "./lib/template"
+require "./lib/echos"
 
-check_disk = Check.new(name: :check_disk, command: "df -h")
-check_mem = Check.new(name: :check_mem, command: "free -m")
-check_load = Check.new(name: :check_load, command: "uptime")
+CONF_FILE = "./config/memory.json"
 
-disk_template = Template.new(:disk_template)
-disk_template.add([check_disk, check_load, check_disk])
+checks = Echos::Loader.load_file(CONF_FILE)
 
-performance_template = Template.new(:performance_template)
-performance_template.add([check_mem, check_load])
+checks.each do |check|
+  check = Echos::Check.new(check.first, check.last)
 
-combined_template = disk_template + performance_template
-combined_template.checks.each do |x|
-  puts ">> #{x.name} \n"
-  system(x.command)
+  cmd = Echos::Command.new
+  cmd.execute!(check)
+  puts cmd.packet.to_s
+
+  q = Echos::Transport.new
+  q.publish(cmd.packet.to_s)
+
 end
 
