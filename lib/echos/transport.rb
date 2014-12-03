@@ -23,7 +23,7 @@ module Echos
         Echos::logger.info puts metadata
       end
 
-      Echos::logger.info puts payload
+      Echos::logger.info puts payload if payload
     end
 
     def stop
