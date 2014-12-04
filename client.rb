@@ -1,22 +1,6 @@
 require 'eventmachine'
 require "./lib/echos"
 
-class CommandProxy
-  def run(check)
-    Proc.new do
-      cmd = Echos::Command.new
-      cmd.execute!(check)
-    end
-  end
-
-  def transport
-    Proc.new do |cmd|
-      q = Echos::Transport.new
-      q.publish(cmd.packet.to_s)
-    end
-  end
-end
-
 CONF_FILE = "./config/checks.json"
 
 checks = Echos::Loader.load_file(CONF_FILE)
