@@ -2,34 +2,34 @@ require "bunny"
 
 module Echos
   class Transport
+    attr_reader :connection, :channel, :queue
 
     def initialize
-      @conn = Bunny.new
-      @conn.start
-      @ch = @conn.create_channel
-      @queue  = @ch.queue("echos")
+      @connection ||= Bunny.new
+      connection.start
+      @channel ||= connection.create_channel
+      @queue  ||= channel.queue("echos")
     end
 
     def publish(msg)
-      @queue.publish(msg)
+      queue.publish(msg)
     end
 
-    def consume(options = {})
-      delivery_info, metadata, payload = @queue.pop
+    def consume(options={})
+      delivery_info, metadata, payload = queue.pop
       debug_mode = options.fetch(:debug, false)
 
       if debug_mode
         Echos::logger.info delivery_info
-        Echos::logger.info puts metadata
+        Echos::logger.info metadata
       end
 
-      Echos::logger.info puts payload if payload
+      Echos::logger.info payload if payload
     end
 
     def stop
-      @conn.stop
+      connection.stop
     end
-
   end
 end
 
