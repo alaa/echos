@@ -10,17 +10,19 @@ module Echos
 
     def success
       base_packet.merge(
-        { stdout: proccess.out,
-          stderr: proccess.err,
-          exitstatus: proccess.status.exitstatus,
-          runtime: proccess.runtime,
-          pid: proccess.status.pid })
+        stdout: proccess.out,
+        stderr: proccess.err,
+        exitstatus: proccess.status.exitstatus,
+        runtime: proccess.runtime,
+        pid: proccess.status.pid
+      )
     end
 
     def timeout
       base_packet.merge(
-        { stdout: "timeout",
-          stderr: "timeout" })
+        stdout: "timeout",
+        stderr: "timeout"
+      )
     end
 
     def hostname
@@ -35,11 +37,13 @@ module Echos
     attr_reader :check, :proccess
 
     def base_packet
-      { hostname: hostname,
+      {
+        hostname: hostname,
         ipaddress: ipaddress,
         timestamp: Time.now,
         check_name: check.name.to_s,
-        check_handlers: check.handlers }
+        check_handlers: check.handlers
+      }
     end
   end
 end
