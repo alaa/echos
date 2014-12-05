@@ -6,13 +6,13 @@ module Echos
     DEFFAULT_INTERVAL_VALUE = 30
     DEFAULT_HANDLER = "default_handler"
 
-    def initialize(check_name, args={})
-      @name = check_name
-      @command = args[:command]
-      @timeout = args.fetch(:timeout, DEFAULT_CHECK_TIMEOUT)
-      @handlers = args.fetch(:handlers, DEFAULT_HANDLER)
-      @path = args.fetch(:path, false)
-      @interval = args.fetch(:interval, DEFFAULT_INTERVAL_VALUE)
+    def initialize(name:, command:, timeout: DEFAULT_CHECK_TIMEOUT, handlers: DEFAULT_HANDLER, path: false, interval: DEFFAULT_INTERVAL_VALUE)
+      @name = name
+      @command = command
+      @timeout = timeout
+      @handlers = handlers
+      @path = path
+      @interval = interval
     end
 
     def ==(other)
