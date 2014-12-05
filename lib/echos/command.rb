@@ -18,8 +18,8 @@ module Echos
         success?
 
       rescue POSIX::Spawn::TimeoutExceeded => e
-        #Echos::logger.error "Command #{check.command} timedout!"
-        #Echos::logger.error e
+        Echos::logger.error "Command #{check.command} timedout!"
+        Echos::logger.error e
       end
     end
 
