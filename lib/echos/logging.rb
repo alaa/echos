@@ -1,21 +1,22 @@
 require 'logger'
 
-module Logging
+module Echos
+  module Logging
 
-  def self.included(base)
-    base.extend(ClassMethods)
-  end
-
-  module ClassMethods
-    def logger
-      @logger ||= Logger.new($stdout)
+    def self.included(base)
+      base.extend(ClassMethods)
     end
-  end
 
-  # Instance methods
-  def logger
-    Logging.logger
-  end
+    module ClassMethods
+      def logger
+        @logger ||= Logger.new($stdout)
+      end
+    end
 
+    # Instance methods
+    def logger
+      Logging.logger
+    end
+
+  end
 end
-
