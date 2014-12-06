@@ -1,4 +1,5 @@
 require 'eventmachine'
+require 'json'
 
 module Echos
   class Client
@@ -32,7 +33,7 @@ module Echos
 
     def callback
       Proc.new do |packet|
-        queue.publish(packet.to_s)
+        queue.publish(packet.to_json)
       end
     end
   end
