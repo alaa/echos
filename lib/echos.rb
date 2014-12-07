@@ -6,7 +6,8 @@ require 'echos/check'
 require 'echos/template'
 require 'echos/command'
 require 'echos/packet'
-require 'echos/transport'
+require 'echos/queue'
+require 'echos/bus'
 require 'echos/client'
 
 module Echos
