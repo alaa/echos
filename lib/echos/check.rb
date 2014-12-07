@@ -3,10 +3,14 @@ module Echos
     attr_reader :name, :command, :timeout, :handlers, :path, :interval
 
     DEFAULT_CHECK_TIMEOUT = 5
-    DEFFAULT_INTERVAL_VALUE = 30
+    DEFFAULT_INTERVAL_VALUE = 5
     DEFAULT_HANDLER = "default_handler"
 
-    def initialize(name:, command:, timeout: DEFAULT_CHECK_TIMEOUT, handlers: DEFAULT_HANDLER, path: false, interval: DEFFAULT_INTERVAL_VALUE)
+    def initialize( name:, command:,
+                    timeout: DEFAULT_CHECK_TIMEOUT,
+                    handlers: DEFAULT_HANDLER,
+                    path: false,
+                    interval: DEFFAULT_INTERVAL_VALUE )
       @name = name
       @command = command
       @timeout = timeout
