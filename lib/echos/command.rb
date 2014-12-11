@@ -3,33 +3,32 @@ require 'json'
 
 module Echos
   class Command
-    DEFAULT_EXECUTION_TIMEOUT = 5
 
-    def initialize(args={})
-      @timeout = args.fetch(:timeout, DEFAULT_EXECUTION_TIMEOUT)
+    attr_reader :name, :command, :timeout, :child, :handlers
+    # make readers private
+
+    def initialize(name, command, handlers, timeout)
+      @name, @command, @hanlders, @timeout = name, command, handlers, timeout
     end
 
-    def execute!(check)
-      @check = check
-      command = check.path ? (check.path + check.command) : check.command
-
+    def execute!
       begin
-        @child = POSIX::Spawn::Child.new(command, timeout: (check.timeout || timeout))
+        puts command
+        @child = POSIX::Spawn::Child.new(command, timeout.to_s)
         success?
 
       rescue POSIX::Spawn::TimeoutExceeded => e
-        Echos::logger.error "Command #{check.command} timedout!"
+        Echos::logger.error "Command #{command} timedout!"
         Echos::logger.error e
       end
     end
 
     def packet
-      packet = Echos::Packet.new(check, child)
+      packet = Echos::Packet.new(name, handlers, child)
       success? ? packet.success : packet.timeout
     end
 
     private
-    attr_reader :timeout, :child, :check
 
     def success?
       begin

@@ -8,6 +8,8 @@ module Echos
       if valid_file?(file)
         content = IO.read(file)
 
+        # checkout converting string into hash!
+
         begin
           MultiJson.load(content, symbolize_keys: true)
         rescue MultiJson::ParseError => exception

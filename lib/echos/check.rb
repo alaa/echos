@@ -1,12 +1,18 @@
 module Echos
-  class Check
-    attr_reader :name, :command, :timeout, :handlers, :path, :interval
+  # Understands how to read a config file. and to give check
+  # The class is the config the data is an Array of Strucuts
 
-    DEFAULT_CHECK_TIMEOUT = 5
-    DEFFAULT_INTERVAL_VALUE = 5
+  class Check
+    # consider converting this into a Strucut
+
+    attr_reader :name, :timeout, :handlers, :path, :interval
+
+    DEFAULT_CHECK_TIMEOUT = 1
+    DEFFAULT_INTERVAL_VALUE = 10
     DEFAULT_HANDLER = "default_handler"
 
-    def initialize( name:, command:,
+    def initialize( name:,
+                    command:,
                     timeout: DEFAULT_CHECK_TIMEOUT,
                     handlers: DEFAULT_HANDLER,
                     path: false,
@@ -27,6 +33,11 @@ module Echos
     def hash
       [self.name, self.command].hash
     end
+
+    def command
+      path ? (path + @command) : @command
+    end
+
   end
 end
 

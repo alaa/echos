@@ -3,8 +3,12 @@ require 'socket'
 module Echos
   class Packet
 
-    def initialize(check, proccess)
-      @check = check
+    # make them private
+    attr_reader :name, :handlers, :proccess
+
+    def initialize(name, handlers, proccess)
+      @name = name
+      @handlers = handlers
       @proccess = proccess
     end
 
@@ -34,15 +38,14 @@ module Echos
     end
 
     private
-    attr_reader :check, :proccess
 
     def base_packet
       {
         hostname: hostname,
         ipaddress: ipaddress,
         timestamp: Time.now,
-        check_name: check.name.to_s,
-        check_handlers: check.handlers
+        name: name,
+        handler: handlers
       }
     end
   end
