@@ -22,8 +22,8 @@ module Echos
         debug_mode = options.fetch(:debug, false)
 
         if debug_mode
-          Echos::logger.info delivery_info
-          Echos::logger.info metadata
+          logger.info delivery_info
+          logger.info metadata
         end
 
         Echos::logger.info payload if payload

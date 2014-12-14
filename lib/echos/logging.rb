@@ -13,7 +13,6 @@ module Echos
       end
     end
 
-    # Instance methods
     def logger
       Logging.logger
     end

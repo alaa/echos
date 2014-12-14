@@ -8,10 +8,9 @@ module Echos
       if valid_file?(file)
         content = IO.read(file)
 
-        # checkout converting string into hash!
-
         begin
           MultiJson.load(content, symbolize_keys: true)
+
         rescue MultiJson::ParseError => exception
           Echos::logger.info(exception.cause)
         end
@@ -23,6 +22,7 @@ module Echos
     def self.valid_file?(file)
       File.file?(file) && File.readable?(file)
     end
+
   end
 end
 
