@@ -2,7 +2,7 @@ require 'eventmachine'
 require 'json'
 
 module Echos
-  class Client
+  class Scheduler
 
     def initialize(checks, queue)
       @checks, @queue = checks, queue
@@ -10,20 +10,21 @@ module Echos
 
     def start!
       EM.run do
-        checks.each do |check|
-          check_obj = Check.new(check.last.merge(name: check.first))
-          puts check_obj.interval
-
-          EM.add_periodic_timer(check_obj.interval) do
-            EM.defer(operation(check_obj), callback(check_obj))
-          end
-
+        checks.each do |check_data|
+          check = Check.new(check_data.last.merge(name: check_data.first))
+          schedule_check(check)
         end
       end
     end
 
     private
     attr_reader :checks, :queue
+
+    def schedule_check(check)
+      EM.add_periodic_timer(check.interval) do
+        EM.defer(operation(check), callback(check))
+      end
+    end
 
     def operation(check)
       Proc.new { check.execute! }
@@ -34,7 +35,6 @@ module Echos
         queue.publish(packet.to_json)
       end
     end
-
   end
 end
 

@@ -7,7 +7,7 @@ require 'echos/template'
 require 'echos/command'
 require 'echos/queue'
 require 'echos/bus'
-require 'echos/client'
+require 'echos/scheduler'
 
 module Echos
   include Logging
