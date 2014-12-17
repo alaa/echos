@@ -12,7 +12,7 @@ module Echos
                    timeout: DEFAULT_CHECK_TIMEOUT,
                    handlers: DEFAULT_HANDLER,
                    path: false,
-                   interval: DEFFAULT_INTERVAL_VALUE )
+                   interval: DEFFAULT_INTERVAL_VALUE)
       @name = name
       @command = command
       @timeout = timeout
