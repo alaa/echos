@@ -7,6 +7,7 @@ require 'echos/template'
 require 'echos/command'
 require 'echos/queue'
 require 'echos/bus'
+require 'echos/packet'
 require 'echos/scheduler'
 
 module Echos
