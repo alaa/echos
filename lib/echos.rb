@@ -9,6 +9,7 @@ require 'echos/queue'
 require 'echos/bus'
 require 'echos/packet'
 require 'echos/scheduler'
+require 'echos/options_parser'
 
 module Echos
   include Logging

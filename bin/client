@@ -1,8 +1,11 @@
-require "./lib/echos"
+#!/usr/bin/env ruby
 
-CONF_FILE = "./config/checks.json"
+require_relative "../lib/echos"
 
-checks = Echos::Loader.load_file(CONF_FILE)
+options_parser = Echos::OptionsParser.new
+options = options_parser.parse
+
+checks = Echos::Loader.load_file(options[:config])
 bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
 
 client = Echos::Scheduler.new(checks, bus)
