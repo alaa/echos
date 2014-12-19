@@ -1,19 +1,22 @@
 require 'json'
 
 module Echos
-  class Packet
-
-    def initialize(process)
-      @process = process
-    end
-
+  module BasePacket
     def +(other)
-      return false unless other.class == Hash
+      raise TypeError unless other.class == Hash
       body.merge!(other)
     end
 
     def to_json
       body.to_json
+    end
+  end
+
+  class Packet
+    include BasePacket
+
+    def initialize(process)
+      @process = process
     end
 
     private
@@ -29,20 +32,13 @@ module Echos
   end
 
   class TimeoutPacket
+    include BasePacket
+
+    private
 
     def body
       { process_runtime: -1 }
     end
-
-    def +(other)
-      return false unless other.class == Hash
-      body.merge!(other)
-    end
-
-    def to_json
-      body.to_json
-    end
-
   end
 end
 
