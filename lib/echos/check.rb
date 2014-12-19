@@ -22,9 +22,9 @@ module Echos
     end
 
     def execute!
-      execute_object = Command.new(command: command_with_path, timeout: timeout)
-      process_info = execute_object.execute!
-      merge_check_info(process_info)
+      command = Command.new(command: command_with_path, timeout: timeout)
+      packet = command.execute!
+      packet + check_data
     end
 
     private
@@ -43,13 +43,13 @@ module Echos
       path ? (path + command) : command
     end
 
-    def merge_check_info(hash)
-      hash.merge(check_name: name,
-                 command: command_with_path,
-                 timeout: timeout,
-                 handlers: handlers,
-                 interval: interval,
-                 timestamp: Time.now)
+    def check_data
+      {check_name: name,
+       command: command_with_path,
+       timeout: timeout,
+       handlers: handlers,
+       interval: interval,
+       timestamp: Time.now}
     end
   end
 end
