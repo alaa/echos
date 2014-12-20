@@ -10,6 +10,10 @@ module Echos
     def to_json
       body.to_json
     end
+
+    def body
+      Hash.new
+    end
   end
 
   class Packet
