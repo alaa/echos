@@ -11,7 +11,7 @@ module Echos
       end
     }
 
-    it "expects packet class to understand equality with hash" do
+    it "expects packet class to understand addition with hash" do
       expect(dummy.new + Hash.new).not_to raise_error
     end
 
