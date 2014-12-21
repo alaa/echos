@@ -16,16 +16,10 @@ module Echos
     end
   end
 
-  class Packet
+  Packet = Struct.new(:process) do
     include BasePacket
 
-    def initialize(process)
-      @process = process
-    end
-
     private
-    attr_reader :process
-
     def body
       { process_stdout: process.out,
         process_stderr: process.err,
@@ -35,11 +29,10 @@ module Echos
     end
   end
 
-  class TimeoutPacket
+  TimeoutPacket = Struct.new(:process) do
     include BasePacket
 
     private
-
     def body
       { process_runtime: -1 }
     end
