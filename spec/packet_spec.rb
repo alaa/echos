@@ -12,7 +12,7 @@ module Echos
     }
 
     it "expects packet class to understand addition with hash" do
-      expect(dummy.new + Hash.new).not_to raise_error
+      expect{ dummy.new + Hash.new }.not_to raise_error
     end
 
     it "expects packet to respond to to_json" do
