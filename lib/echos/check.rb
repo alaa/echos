@@ -27,21 +27,14 @@ module Echos
       packet + check_data
     end
 
-    private
-    attr_reader :name, :command, :timeout, :handlers, :path
-
     def ==(other)
       return false unless self.class === other
-      self.name == other.name && self.command_with_path == other.command_with_path
+      self.command_with_path == other.command_with_path
     end
+    alias_method :eql?, :==
 
-    def hash
-      [self.name, self.command].hash
-    end
-
-    def command_with_path
-      path ? (path + command) : command
-    end
+    protected
+    attr_reader :name, :command, :timeout, :handlers, :path
 
     def check_data
       {check_name: name,
@@ -50,6 +43,14 @@ module Echos
        handlers: handlers,
        interval: interval,
        timestamp: Time.now}
+    end
+
+    def hash
+      self.command_with_path.hash
+    end
+
+    def command_with_path
+      path ? File.join(path, command) : command
     end
   end
 end
