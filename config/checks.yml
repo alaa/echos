@@ -1,0 +1,32 @@
+---
+check_procs:
+  command: check_procs
+  path: /usr/lib/nagios/plugins/
+
+check_load:
+  command: check_load -w 2 -w 3
+  path: /usr/lib/nagios/plugins/
+
+check_ntp:
+  command: check_ntp -H localhost -w 0.5 -c 1.0
+  path: /usr/lib/nagios/plugins/
+
+check_users:
+  command: check_users -w 2 -c 3
+  path: /usr/lib/nagios/plugins/
+
+check_http:
+  command: check_http -H localhost
+  path: /usr/lib/nagios/plugins/
+
+check_https:
+  command: check_http -H localhost -S
+  path: /usr/lib/nagios/plugins/
+
+check_sawp:
+  command: check_swap -w 20% -c 10%
+  path: /usr/lib/nagios/plugins/
+
+check_apt:
+  command: check_apt
+  path: /usr/lib/nagios/plugins/

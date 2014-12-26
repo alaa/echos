@@ -1,17 +1,11 @@
-require 'json'
-require 'multi_json'
+require 'yaml'
 
 module Echos
   class Loader
 
     def self.load_file(file)
       raise Exception unless valid_file?(file)
-
-      content = IO.read(file)
-      MultiJson.load(content, symbolize_keys: true)
-
-    rescue MultiJson::ParseError => exception
-      Echos::logger.info(exception.cause)
+      YAML.load_file(file)
     end
 
     private

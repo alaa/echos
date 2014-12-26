@@ -10,8 +10,8 @@ module Echos
 
     def start!
       EM.run do
-        checks.each do |check_data|
-          check = Check.new(check_data.last.merge(name: check_data.first))
+        checks.each do |check_name, options|
+          check = Check.new(name: check_name, options: options)
           schedule_check(check)
         end
       end

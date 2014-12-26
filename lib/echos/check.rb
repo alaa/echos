@@ -7,18 +7,13 @@ module Echos
 
     attr_reader :interval
 
-    def initialize(name:,
-                   command:,
-                   timeout: DEFAULT_CHECK_TIMEOUT,
-                   handlers: DEFAULT_HANDLER,
-                   path: false,
-                   interval: DEFFAULT_INTERVAL_VALUE)
+    def initialize(name:, options: options)
       @name = name
-      @command = command
-      @timeout = timeout
-      @handlers = handlers
-      @path = path
-      @interval = interval
+      @command = options['command']
+      @timeout = options.fetch(:timeout, DEFAULT_CHECK_TIMEOUT)
+      @handlers = options.fetch(:handlers, DEFAULT_HANDLER)
+      @path = options.fetch(:path, false)
+      @interval = options.fetch(:interval, DEFFAULT_INTERVAL_VALUE)
     end
 
     def execute!
