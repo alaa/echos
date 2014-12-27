@@ -18,6 +18,7 @@ module Echos
     end
 
     private
+
     attr_reader :checks, :queue
 
     def schedule_check(check)

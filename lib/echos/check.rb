@@ -29,15 +29,18 @@ module Echos
     alias_method :eql?, :==
 
     protected
+
     attr_reader :name, :command, :timeout, :handlers, :path
 
     def check_data
-      {check_name: name,
-       command: command_with_path,
-       timeout: timeout,
-       handlers: handlers,
-       interval: interval,
-       timestamp: Time.now}
+      {
+        check_name: name,
+        command: command_with_path,
+        timeout: timeout,
+        handlers: handlers,
+        interval: interval,
+        timestamp: Time.now
+      }
     end
 
     def hash

@@ -17,6 +17,7 @@ module Echos
     end
 
     private
+
     attr_accessor :options
 
     def config_option(option:)

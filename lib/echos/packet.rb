@@ -1,6 +1,7 @@
 require 'json'
 
 module Echos
+
   module BasePacket
     def +(other)
       raise TypeError unless other.class == Hash
@@ -20,12 +21,15 @@ module Echos
     include BasePacket
 
     private
+
     def body
-      { process_stdout: process.out,
+      {
+        process_stdout: process.out,
         process_stderr: process.err,
         process_exitstatus: process.status.exitstatus,
         process_runtime: process.runtime,
-        process_pid: process.status.pid }
+        process_pid: process.status.pid
+      }
     end
   end
 
@@ -33,9 +37,11 @@ module Echos
     include BasePacket
 
     private
+
     def body
       { process_runtime: -1 }
     end
   end
+
 end
 
