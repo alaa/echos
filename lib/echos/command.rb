@@ -11,12 +11,12 @@ module Echos
       process = POSIX::Spawn::Child.new(command, timeout: timeout)
       Packet.new(process)
 
-    rescue POSIX::Spawn::TimeoutExceeded => e
-      Echos::logger.error e
+    rescue POSIX::Spawn::TimeoutExceeded
       TimeoutPacket.new
     end
 
     private
+
     attr_accessor :command, :timeout
   end
 end
