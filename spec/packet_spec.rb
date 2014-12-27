@@ -30,11 +30,13 @@ module Echos
                                    :status => status) }
 
     let(:json_packet) {
-      { process_stdout: process.out,
+      {
+        process_stdout: process.out,
         process_stderr: process.err,
         process_exitstatus: process.status.exitstatus,
         process_runtime: process.runtime,
-        process_pid: process.status.pid }.to_json
+        process_pid: process.status.pid
+      }.to_json
     }
 
     subject { Packet.new(process) }
