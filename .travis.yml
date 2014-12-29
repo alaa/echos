@@ -1,0 +1,9 @@
+language: ruby
+sudo: false
+rvm:
+  - 2.1.4
+  - 2.1.5
+  - ruby-head
+before_script:
+  - bundle update
+cache: bundler
