@@ -7,4 +7,5 @@ gem "bunny"
 
 group :development do
   gem "rspec"
+  gem "rake"
 end
