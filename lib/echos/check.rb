@@ -1,9 +1,8 @@
 module Echos
   class Check
-
     DEFAULT_CHECK_TIMEOUT = 1
     DEFFAULT_INTERVAL_VALUE = 5
-    DEFAULT_HANDLER = "default_handler"
+    DEFAULT_HANDLER = 'default_handler'
 
     attr_reader :interval
 
@@ -23,8 +22,8 @@ module Echos
     end
 
     def ==(other)
-      return false unless self.class === other
-      self.command_with_path == other.command_with_path
+      return false unless self.class == other.class
+      command_with_path == other.command_with_path
     end
     alias_method :eql?, :==
 
@@ -44,7 +43,7 @@ module Echos
     end
 
     def hash
-      self.command_with_path.hash
+      command_with_path.hash
     end
 
     def command_with_path
@@ -52,4 +51,3 @@ module Echos
     end
   end
 end
-

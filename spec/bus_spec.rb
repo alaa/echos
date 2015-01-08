@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Echos
   describe Bus do
-    subject{ Bus.new(Class) }
+    subject { Bus.new(Class) }
 
     interfaces = [:publish, :consume]
 
@@ -13,4 +13,3 @@ module Echos
     end
   end
 end
-

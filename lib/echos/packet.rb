@@ -1,10 +1,9 @@
 require 'json'
 
 module Echos
-
   module BasePacket
     def +(other)
-      raise TypeError unless other.class == Hash
+      fail TypeError unless other.class == Hash
       body.merge!(other)
     end
 
@@ -13,7 +12,7 @@ module Echos
     end
 
     def body
-      Hash.new
+      {}
     end
   end
 
@@ -42,6 +41,4 @@ module Echos
       { process_runtime: -1 }
     end
   end
-
 end
-

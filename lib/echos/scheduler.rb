@@ -3,7 +3,6 @@ require 'json'
 
 module Echos
   class Scheduler
-
     def initialize(checks, queue)
       @checks, @queue = checks, queue
     end
@@ -28,14 +27,13 @@ module Echos
     end
 
     def operation(check)
-      Proc.new { check.execute! }
+      proc { check.execute! }
     end
 
-    def callback(check)
-      Proc.new do |packet|
+    def callback(_check)
+      proc do |packet|
         queue.publish(packet.to_json)
       end
     end
   end
 end
-

@@ -2,12 +2,11 @@ require 'optparse'
 
 module Echos
   class OptionsParser
-
     def initialize
-      @options = Hash.new
+      @options = {}
     end
 
-    def parse(args=ARGV)
+    def parse(_args = ARGV)
       parser = OptionParser.new do |option|
         config_option(option: option)
       end
@@ -21,10 +20,9 @@ module Echos
     attr_accessor :options
 
     def config_option(option:)
-      option.on("-c", "-r --config", "Configurations File") do |file|
+      option.on('-c', '-r --config', 'Configurations File') do |file|
         options[:config] = file
       end
     end
   end
 end
-

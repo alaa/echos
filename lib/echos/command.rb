@@ -2,7 +2,6 @@ require 'posix/spawn'
 
 module Echos
   class Command
-
     def initialize(command:, timeout:)
       @command, @timeout = command, timeout
     end
@@ -20,4 +19,3 @@ module Echos
     attr_accessor :command, :timeout
   end
 end
-

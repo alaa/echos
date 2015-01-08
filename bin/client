@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/echos"
+require_relative '../lib/echos'
 
 options_parser = Echos::OptionsParser.new
 options = options_parser.parse
@@ -10,4 +10,3 @@ bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
 
 client = Echos::Scheduler.new(checks, bus)
 client.start!
-

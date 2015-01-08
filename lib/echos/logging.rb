@@ -2,7 +2,6 @@ require 'logger'
 
 module Echos
   module Logging
-
     def self.included(base)
       base.extend(ClassMethods)
     end
@@ -16,6 +15,5 @@ module Echos
     def logger
       Logging.logger
     end
-
   end
 end

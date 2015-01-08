@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/echos"
+require_relative '../lib/echos'
 
 bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
 
-while true do
+loop do
   bus.consume
   sleep 0.1
 end
-

@@ -1,4 +1,4 @@
-$:.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'echos/logging'
 require 'echos/loader'
@@ -13,4 +13,3 @@ require 'echos/options_parser'
 module Echos
   include Logging
 end
-
