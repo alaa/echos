@@ -8,4 +8,6 @@ gem 'bunny'
 group :development do
   gem 'rspec'
   gem 'rake'
+  gem 'rubocop'
+  gem 'flay'
 end
