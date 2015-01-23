@@ -1,10 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/echos'
+require 'simple_circuit_breaker'
 
-bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
+failure_threshold = 3
+retry_timeout = 10
+circuit_breaker = SimpleCircuitBreaker.new(failure_threshold, retry_timeout)
 
-loop do
-  bus.consume
-  sleep 0.1
+circuit_breaker.handle do
+  bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
+  loop do
+    bus.consume
+    sleep 0.1
+  end
+end
+
+circuit_breaker.handle do
+  bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
 end
