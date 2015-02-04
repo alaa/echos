@@ -2,4 +2,4 @@
 
 require 'daemons'
 
-Daemons.run("#{Dir.pwd}/client")
+Daemons.run(File.join(File.dirname(__FILE__), 'client'))
