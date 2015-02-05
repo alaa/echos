@@ -3,7 +3,7 @@ require 'yaml'
 module Echos
   class Loader
     def self.load_file(file)
-      fail Exception unless valid_file?(file)
+      raise InvalidFile unless valid_file?(file)
       YAML.load_file(file)
     end
 
