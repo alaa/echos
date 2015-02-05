@@ -2,8 +2,8 @@
 
 require_relative '../lib/echos'
 
-options_parser = Echos::OptionsParser.new
-options = options_parser.parse
+cli = Echos::CLI.new
+options = cli.parse
 
 checks = Echos::Loader.load_file(options[:config])
 bus = Echos::Bus.new(Echos::Queue::RabbitMQ)

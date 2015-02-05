@@ -1,7 +1,7 @@
 require 'optparse'
 
 module Echos
-  class OptionsParser
+  class CLI
     def initialize
       @options = {}
     end
