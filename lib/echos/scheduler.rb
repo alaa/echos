@@ -13,7 +13,6 @@ module Echos
     def start!
       EM.run do
         @check_objects.each do |check|
-          Echos.logger.info check.send(:command_with_path)
           schedule_check(check)
         end
       end

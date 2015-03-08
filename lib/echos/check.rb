@@ -13,7 +13,6 @@ module Echos
       @handlers = options.fetch('handlers', DEFAULT_HANDLER)
       @path = options.fetch('path', false)
       @interval = options.fetch('interval', DEFFAULT_INTERVAL_VALUE)
-      Echos.logger.info options
     end
 
     def execute!

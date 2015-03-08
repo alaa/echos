@@ -1,4 +1,5 @@
 require 'bunny'
+require 'json'
 require 'forwardable'
 
 module Echos
@@ -18,7 +19,10 @@ module Echos
 
       def consume(options = {})
         delivery_info, metadata, payload = queue.pop
-        Echos.logger.info payload if payload
+        msg = JSON.parse payload
+        Echos.logger.info msg['process_stdout'] if payload
+      rescue
+        Echos.logger.info "-"
       end
     end
   end
