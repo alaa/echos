@@ -51,7 +51,7 @@ module Echos
     end
 
     def full_path
-      raise InvalidPath, @name unless File.directory? path
+      raise(InvalidPath, @name) unless File.directory?(path)
       File.join(path, command)
     end
   end

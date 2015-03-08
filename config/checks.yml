@@ -33,3 +33,7 @@ check_apt:
 
 load:
   command: uptime
+
+ports:
+  command: nmap localhost
+  interval: 15
