@@ -4,13 +4,16 @@ require 'json'
 module Echos
   class Scheduler
     def initialize(checks, queue)
-      @checks, @queue = checks, queue
+      checks, @queue = checks, queue
+      @check_objects = checks.each_with_object([]) do |(name, options), acc|
+        acc << Check.new(name: name, options: options)
+      end
     end
 
     def start!
       EM.run do
-        checks.each do |check_name, options|
-          check = Check.new(name: check_name, options: options)
+        @check_objects.each do |check|
+          Echos.logger.info check.send(:command_with_path)
           schedule_check(check)
         end
       end
