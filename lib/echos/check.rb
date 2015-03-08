@@ -9,15 +9,16 @@ module Echos
     def initialize(name:, options: options)
       @name = name
       @command = options['command']
-      @timeout = options.fetch(:timeout, DEFAULT_CHECK_TIMEOUT)
-      @handlers = options.fetch(:handlers, DEFAULT_HANDLER)
-      @path = options.fetch(:path, false)
-      @interval = options.fetch(:interval, DEFFAULT_INTERVAL_VALUE)
+      @timeout = options.fetch('timeout', DEFAULT_CHECK_TIMEOUT)
+      @handlers = options.fetch('handlers', DEFAULT_HANDLER)
+      @path = options.fetch('path', false)
+      @interval = options.fetch('interval', DEFFAULT_INTERVAL_VALUE)
+      Echos.logger.info options
     end
 
     def execute!
-      command = Command.new(command: command_with_path, timeout: timeout)
-      packet = command.execute!
+      cmd = Command.new(command: command_with_path, timeout: timeout)
+      packet = cmd.execute!
       packet + check_data
     end
 
@@ -47,7 +48,14 @@ module Echos
     end
 
     def command_with_path
-      path ? File.join(path, command) : command
+      path ? full_path : command
+    end
+
+    def full_path
+      raise InvalidPath, @name unless File.directory? path
+      File.join(path, command)
     end
   end
+
+  class InvalidPath < Exception; end
 end
