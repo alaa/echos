@@ -37,3 +37,6 @@ load:
 ports:
   command: nmap localhost
   interval: 15
+
+external_check:
+  command: ruby ~/check.rb

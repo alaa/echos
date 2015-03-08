@@ -26,6 +26,13 @@ check_http:
 check_database_replication:
   command: check_mysql_replication
   path: /usr/local/custom/checks
+
+check_open_ports:
+  command: nmap -PN0 localhost
+  interval: 30
+
+check_external_ruby_script:
+  command: ruby ~/checks/online_users.rb
 ```
 
 ## Run echos with the [--config] or [-c] option:
