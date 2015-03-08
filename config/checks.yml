@@ -30,3 +30,6 @@ check_sawp:
 check_apt:
   command: check_apt
   path: /usr/lib/nagios/plugins/
+
+load:
+  command: uptime
