@@ -12,4 +12,12 @@ require 'echos/cli'
 
 module Echos
   include Logging
+
+  class Version
+    VERSION = '0.1'
+
+    def self.to_s
+      "Running Echos version #{VERSION}"
+    end
+  end
 end

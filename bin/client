@@ -2,6 +2,8 @@
 
 require_relative '../lib/echos'
 
+puts Echos::Version.to_s
+
 cli = Echos::CLI.new
 options = cli.parse
 

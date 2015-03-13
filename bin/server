@@ -2,6 +2,8 @@
 
 require_relative '../lib/echos'
 
+puts Echos::Version.to_s
+
 bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
 
 loop do
