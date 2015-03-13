@@ -2,7 +2,15 @@
 # Echos
 [![Build Status](https://travis-ci.org/alaa/echos.svg?branch=master)](https://travis-ci.org/alaa/echos)
 
-### Simple monitoring system for Micro-Services
+Echos is a simple monitoring tool built mainly for microservices architecture, It has a modular event store layer and publishes all metrics to it.
+
+Echos runs on the top of eventmachine and uses a simple YAML configurations file to load its checks.
+Every check has the following attributes
+
+- command [mandatory]
+- path [optional, default: $PATH]
+- interval [optional, default: 30]
+- timeout [optional, default: 5]
 
 ## Requirements:
 * Ruby Version > 2.1.4
@@ -22,14 +30,12 @@ check_ntp:
 check_http:
   command: check_http -H localhost
   path: /usr/lib/nagios/plugins/
+  interval: 30
+  timeout: 2
 
 check_database_replication:
   command: check_mysql_replication
   path: /usr/local/custom/checks
-
-check_open_ports:
-  command: nmap -PN0 localhost
-  interval: 30
 
 check_external_ruby_script:
   command: ruby ~/checks/online_users.rb
