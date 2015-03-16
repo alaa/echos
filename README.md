@@ -2,7 +2,7 @@
 # Echos
 [![Build Status](https://travis-ci.org/alaa/echos.svg?branch=master)](https://travis-ci.org/alaa/echos)
 
-Echos is a simple monitoring tool built mainly for microservices architecture, It has a modular event store layer and publishes all metrics to it.
+[WIP] Echos is a simple monitoring tool built mainly for microservices architecture, It has a modular event store layer and publishes all metrics to it.
 
 Echos runs on the top of eventmachine and uses a simple YAML configurations file to load its checks.
 Every check has the following attributes
@@ -43,3 +43,6 @@ check_external_ruby_script:
 
 ## Run echos with the [--config] or [-c] option:
 ```echos_ctl start -- -c /path/to/checks.yml```
+
+## License
+MIT
