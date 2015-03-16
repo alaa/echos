@@ -16,7 +16,7 @@ module Echos
     end
 
     def execute!
-      cmd = Command.new(command: command_with_path, timeout: timeout)
+      cmd = Command.new(strategy: Command::Providers::Execute, command: command_with_path, timeout: timeout)
       packet = cmd.execute!
       packet + check_data
     end

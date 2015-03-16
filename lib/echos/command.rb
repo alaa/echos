@@ -2,20 +2,32 @@ require 'posix/spawn'
 
 module Echos
   class Command
-    def initialize(command:, timeout:)
-      @command, @timeout = command, timeout
+    def initialize(strategy:, command:, timeout:)
+      @strategy = strategy.new(command: command, timeout: timeout)
     end
 
     def execute!
-      process = POSIX::Spawn::Child.new(command, timeout: timeout)
-      Packet.new(process)
-
-    rescue POSIX::Spawn::TimeoutExceeded
-      TimeoutPacket.new
+      @strategy.execute!
     end
 
-    private
+    module Providers
+      class Execute
+        def initialize(command:, timeout:)
+          @command, @timeout = command, timeout
+        end
 
-    attr_accessor :command, :timeout
+        def execute!
+          process = POSIX::Spawn::Child.new(command, timeout: timeout)
+          Packet.new(process)
+
+        rescue POSIX::Spawn::TimeoutExceeded
+          TimeoutPacket.new
+        end
+
+        private
+
+        attr_accessor :command, :timeout
+      end
+    end
   end
 end
