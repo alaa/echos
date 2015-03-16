@@ -1,18 +1,14 @@
 require 'eventmachine'
-require 'json'
 
 module Echos
   class Scheduler
     def initialize(checks, queue)
-      checks, @queue = checks, queue
-      @check_objects = checks.each_with_object([]) do |(name, options), acc|
-        acc << Check.new(name: name, options: options)
-      end
+      @checks, @queue = checks, queue
     end
 
     def start!
       EM.run do
-        @check_objects.each do |check|
+        check_objects.each do |check|
           schedule_check(check)
         end
       end
@@ -35,6 +31,12 @@ module Echos
     def callback(_check)
       proc do |packet|
         queue.publish(packet.to_json)
+      end
+    end
+
+    def check_objects
+      @checks.each_with_object([]) do |(name, options), acc|
+        acc << Check.new(name: name, options: options)
       end
     end
   end
