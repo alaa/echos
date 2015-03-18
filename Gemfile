@@ -11,3 +11,7 @@ group :development do
   gem 'rubocop'
   gem 'flay'
 end
+
+group :test do
+  gem "codeclimate-test-reporter"
+end
