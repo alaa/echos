@@ -1,6 +1,7 @@
 
 # Echos
 [![Build Status](https://travis-ci.org/alaa/echos.svg?branch=master)](https://travis-ci.org/alaa/echos)
+[![Code Climate](https://codeclimate.com/github/alaa/echos/badges/gpa.svg)](https://codeclimate.com/github/alaa/echos)
 
 [WIP] Echos is a simple monitoring tool built mainly for microservices architecture, It has a modular event store layer and publishes all metrics to it.
 
