@@ -12,7 +12,7 @@ module Echos
         options: { command: 'dummyCommand2' } ]
     }
 
-    let(:bus) { Class.new }
+    let(:bus) { Class }
 
     subject { Scheduler.new(check1 + check2, bus) }
 

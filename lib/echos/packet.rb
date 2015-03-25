@@ -7,38 +7,32 @@ module Echos
       body.merge!(other)
     end
 
-    def to_json
-      body.to_json
+    def body
+      { uuid: uuid }
     end
 
-    def body
-      {}
+    def uuid
+      SecureRandom.uuid
     end
   end
 
   Packet = Struct.new(:process) do
     include BasePacket
 
-    private
-
     def body
-      {
-        process_stdout: process.out,
-        process_stderr: process.err,
-        process_exitstatus: process.status.exitstatus,
-        process_runtime: process.runtime,
-        process_pid: process.status.pid
-      }
+      super.merge!({ process_stdout: process.out,
+                     process_stderr: process.err,
+                     process_exitstatus: process.status.exitstatus,
+                     process_runtime: process.runtime,
+                     process_pid: process.status.pid })
     end
   end
 
   TimeoutPacket = Struct.new(:process) do
     include BasePacket
 
-    private
-
     def body
-      { process_runtime: -1 }
+      super.merge!({ process_runtime: -1 })
     end
   end
 end

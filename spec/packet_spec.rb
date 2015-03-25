@@ -4,6 +4,7 @@ require 'json'
 
 module Echos
   describe BasePacket do
+
     let(:dummy) do
       Class.new do
         include BasePacket
@@ -14,8 +15,8 @@ module Echos
       expect { dummy.new + Hash.new }.not_to raise_error
     end
 
-    it 'expects packet to respond to to_json' do
-      expect(dummy.new).to respond_to(:to_json)
+    it 'responds to body' do
+      expect(dummy.new).to respond_to(:body)
     end
   end
 
@@ -32,27 +33,29 @@ module Echos
                      status: status)
     end
 
-    let(:json_packet) do
+    let(:packet) do
       {
         process_stdout: process.out,
         process_stderr: process.err,
         process_exitstatus: process.status.exitstatus,
         process_runtime: process.runtime,
         process_pid: process.status.pid
-      }.to_json
+      }
     end
 
     subject { Packet.new(process) }
 
     it 'converts process data structure to json' do
-      expect(subject.to_json).to eql json_packet
+      allow(SecureRandom).to receive(:uuid).and_return('uuid')
+      expect(subject.body).to include({uuid: 'uuid'}.merge! packet)
     end
   end
 
   describe TimeoutPacket do
     it 'returns proper body of the timeout packet' do
+      allow(SecureRandom).to receive(:uuid).and_return('uuid')
       timeoutpacket = described_class.new
-      expect(timeoutpacket.to_json).to eql ({ process_runtime: -1 }.to_json)
+      expect(timeoutpacket.body).to include({ uuid: 'uuid', process_runtime: -1 })
     end
   end
 end
