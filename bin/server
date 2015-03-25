@@ -8,5 +8,4 @@ bus = Echos::Bus.new(Echos::Queue::RabbitMQ)
 
 loop do
   bus.consume
-  sleep 0.1
 end

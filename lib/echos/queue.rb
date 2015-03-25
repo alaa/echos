@@ -20,9 +20,8 @@ module Echos
       def consume(options = {})
         delivery_info, metadata, payload = queue.pop
         msg = JSON.parse payload
-        Echos.logger.info msg['process_stdout'] if payload
+        Echos.logger.info msg if payload
       rescue
-        Echos.logger.info "-"
       end
     end
   end
